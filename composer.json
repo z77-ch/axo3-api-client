@@ -1,0 +1,23 @@
+{
+    "name": "axo3/api-client",
+    "description": "PHP client for the axo3 real-estate data API: fetch your stock as JSON, keep it as a local file snapshot, revalidate at the interval the API dictates. Framework-free.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["axo3", "real-estate", "immobilien", "api-client", "snapshot", "switzerland"],
+    "homepage": "https://axo3.ch",
+    "authors": [
+        {
+            "name": "Peter Ruepp"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Axo3\\ApiClient\\": "src/"
+        }
+    }
+}
