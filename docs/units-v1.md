@@ -72,6 +72,9 @@ timing rules below.
               "floorNumber": 2,
               "livingArea": 84.5,
               "outdoorArea": 12.0,
+              "netLivingArea": null,
+              "effectiveArea": null,
+              "plotArea": null,
               "priceNet": 1850.0,
               "priceGross": 2050.0,
               "additionalCosts": 200.0,
@@ -143,6 +146,7 @@ project on the axo3 side. No `orphanBuildings` — the model has none.
 | `floorLabel` | string | the wording to display (`EG`, `2. OG`) |
 | `floorNumber` | int | for sorting; `0` = ground floor |
 | `livingArea`, `outdoorArea` | float, m² | — |
+| `netLivingArea`, `effectiveArea`, `plotArea` | float, m² | since 2026-09-08. A **commercial** object carries its size as `effectiveArea` (usable area) and has no `livingArea` — show the usable area where the living area is null. Present on every unit, null when the source has none |
 | `priceNet`, `priceGross`, `additionalCosts` | float, CHF | **all null = price on request** — the notice is the consumer's wording |
 | `sellingPrice` | float, CHF | rent objects |
 | `status` | **`free` \| `reserved` \| `taken`** | never — the three words the model allows; a unit no longer on offer is not delivered at all |
@@ -204,6 +208,7 @@ these links as they are and never rewrites, signs or expires them.
 
 | date | what |
 |---|---|
+| 2026-09-08 | Additive: `netLivingArea`, `effectiveArea`, `plotArea` on every unit (null when unknown). Offices size themselves through `effectiveArea` |
 | 2026-09-05 | `X-Axo3-Retry-After` on 200/304 while a rebuild runs; the consumer honours it (and `Retry-After` on 503/429) at most five times in a row |
 | 2026-09-05 | Consumer rule: render first, ask afterwards — every fetch is a background call |
 | 2026-09-03 | v1: the axo3 model projection; `meta.revalidateAfter`; axo3 media links |
