@@ -106,7 +106,8 @@ class ApiClient
         $raw  = curl_exec($ch);
         $err  = curl_error($ch);
         $http = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        // No curl_close(): a no-op since PHP 8.0, deprecated since 8.5 — the
+        // handle is freed when $ch goes out of scope.
 
         return self::interpret($http, $received, $raw, $err, $expectBundle);
     }
