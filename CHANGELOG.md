@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+Contract `docs/units-v1.md`: additive field `spaces` on every unit (2026-10-30) —
+the recorded rooms `{name, area}`, passed through uninterpreted. No code change: the
+client stores the bundle as it comes, so an existing consumer keeps working and sees
+the new key on its next fetch.
+
 ## 1.0.1 — 2026-10-03
 
 Removed the `curl_close()` call in `ApiClient`. It has been a no-op since

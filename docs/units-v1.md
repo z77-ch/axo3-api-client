@@ -75,6 +75,10 @@ timing rules below.
               "netLivingArea": null,
               "effectiveArea": null,
               "plotArea": null,
+              "spaces": [
+                { "name": "Wohnzimmer", "area": null },
+                { "name": "Aussenfläche", "area": 12.0 }
+              ],
               "priceNet": 1850.0,
               "priceGross": 2050.0,
               "additionalCosts": 200.0,
@@ -147,6 +151,7 @@ project on the axo3 side. No `orphanBuildings` — the model has none.
 | `floorNumber` | int | for sorting; `0` = ground floor |
 | `livingArea`, `outdoorArea` | float, m² | — |
 | `netLivingArea`, `effectiveArea`, `plotArea` | float, m² | since 2026-09-08. A **commercial** object carries its size as `effectiveArea` (usable area) and has no `livingArea` — show the usable area where the living area is null. Present on every unit, null when the source has none |
+| `spaces` | list of `{name, area}` | since 2026-10-30. The rooms recorded on the unit: `name` as typed by the property manager, `area` float m² or null. **Not** the room count (that is `rooms`). axo3 passes them through and interprets nothing — which name counts as what (an outdoor area recorded as a room «Aussenfläche», say) is the consumer's decision. `null` = the data offers no rooms for this unit, `[]` = none recorded. Present on every unit |
 | `priceNet`, `priceGross`, `additionalCosts` | float, CHF | **all null = price on request** — the notice is the consumer's wording |
 | `sellingPrice` | float, CHF | rent objects |
 | `status` | **`free` \| `reserved` \| `taken`** | never — the three words the model allows; a unit no longer on offer is not delivered at all |
@@ -208,6 +213,7 @@ these links as they are and never rewrites, signs or expires them.
 
 | date | what |
 |---|---|
+| 2026-10-30 | Additive: `spaces` on every unit — the recorded rooms `{name, area}`, passed through uninterpreted (null when the data has none) |
 | 2026-09-08 | Additive: `netLivingArea`, `effectiveArea`, `plotArea` on every unit (null when unknown). Offices size themselves through `effectiveArea` |
 | 2026-09-05 | `X-Axo3-Retry-After` on 200/304 while a rebuild runs; the consumer honours it (and `Retry-After` on 503/429) at most five times in a row |
 | 2026-09-05 | Consumer rule: render first, ask afterwards — every fetch is a background call |
